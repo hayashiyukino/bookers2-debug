@@ -5,7 +5,11 @@ class BooksController < ApplicationController
   end
 
   def index
+    # @booksにBookテーブルに保存されたデータを全取得する
     @books = Book.all
+    @user = current_user
+    # @bookに空のモデルオブジェクトBookを作成し代入する
+    @book = Book.new
   end
 
   def create
@@ -15,7 +19,9 @@ class BooksController < ApplicationController
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
+      @user = current_user
       render 'index'
+      @book = Book.new
     end
   end
 
@@ -41,6 +47,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title)
+    params.require(:book).permit(:title, :body)
   end
 end
