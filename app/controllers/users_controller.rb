@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  before_action :ensure_correct_user, only: [:update, :edit]
+  before_action :ensure_correct_user, only: [:edit, :update,]
 
   def show
     @user = User.find(params[:id])
     @books = @user.books
     # @books = @user.booksはアソシエーションの関係。
-    # book.rbで has_many :userと定義されていたためエラーが出た。(bookは複数のユーザーを持てない）belongs_to :userと定義しなおす。　
+    # book.rbで has_many :userと定義されていたためエラーが出た。(bookは複数のユーザーを持てない）belongs_to :userと定義しなおす。
     @book = Book.new
   end
 
