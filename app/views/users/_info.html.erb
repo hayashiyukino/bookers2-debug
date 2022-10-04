@@ -9,12 +9,10 @@
 	  <th><%= user.introduction %></th>
   </tr>
   <tr>
-    <% if users.exists? %>
-      <% users.each do |user| %>
-        <td>フォロー数: <%= user.followings.count %></td>
-        <td>フォロワー数: <%= user.followers.count %></td>
-      <% end %>
-    <% else %>
+    <th>follows: <%= user.followings.count %></th>
+  </tr>
+  <tr>
+    <th>followers: <%= user.followers.count %></th>
   </tr>
 </table>
 
