@@ -40,7 +40,7 @@
           <td>コメント数：<%= @book.book_comments.count %></td>
           <% if @book.user == current_user %>
           <td><%= link_to "Edit",edit_book_path(@book), class: 'btn btn-success'%></td>
-          <td><%= link_to "Destroy",book_path(@book), method: :delete,class: 'btn btn-danger'%></td>
+          <td><%= link_to "Destroy",book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger'%></td>
           <% end %>
           <!--コメント一覧-->
           <% @book.book_comments.each do |comment| %>
@@ -64,8 +64,8 @@
           <tr>
             <td>
             <%= form_with model:[@book,@book_comment] do |f| %>
-            <%= f.text_area :comment, placeholder: "コメントをここに" %>
-            <%= f.submit "送信" %>
+            <%= f.text_area :comment,rows:'5', placeholder: "コメントをここに", class: "w-100" %>
+            <%= f.submit "送信", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
             <% end %>
             </td>
           </tr>

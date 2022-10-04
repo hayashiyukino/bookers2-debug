@@ -47,8 +47,8 @@
         <!--コメントの数-->
         <td>コメント数：<%= book.book_comments.count %></td>
          <% if book.user == current_user %>
-        <td class="botton"><%= link_to"Edit",edit_book_path(book.id),class:'btn btn-success'%></td>
-        <td class="botton"><%= link_to"Destroy",book_path(book), method: :delete,class:'btn btn-danger'%></td>
+        <td><%= link_to"Edit",edit_book_path(book.id),class:'btn btn-success'%></td>
+        <td><%= link_to"Destroy",book_path(book), method: :delete, data: { confirm: '本当に消しますか？' }, class:'btn btn-danger'%></td>
         <% end %>
       </tr>
     <% end %>
