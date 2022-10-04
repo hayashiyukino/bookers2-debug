@@ -19,6 +19,7 @@ class User < ApplicationRecord
   #  reverse_of_relationships = 分かりやすいように名前をつけただけ
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_one_attached :profile_image
+  
   # 一覧画面で使う
   #  フォロー・フォロワーの一覧画面で、user.followersという記述でフォロワーを表示したいので、
   #  throughでスルーするテーブル、sourceで参照するカラムを指定。
