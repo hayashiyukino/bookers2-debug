@@ -36,16 +36,52 @@
             </div>
             <% end %>
           </td>
-           <% if @book.user == current_user %>
+          <!--コメントの数-->
+          <td>コメント数：<%= @book.book_comments.count %></td>
+          <% if @book.user == current_user %>
+          <td class="botton"><%= link_to"Edit",edit_book_path(@book),class:'btn btn-success'%></td>
+          <td class="botton"><%= link_to"Destroy",book_path(@book), method: :delete,class:'btn btn-danger'%></td>
+          <% end %>
+          <!--コメント一覧-->
+          <% @book.book_comments.each do |comment| %>
+          <tr>
+            <td>
+              <%= link_to user_path(comment.user.id) do %>
+                <%= image_tag comment.user.get_profile_image,size: "30x30" %>
+                <br><%= comment.user.name %>
+              <% end %>
+            </td>
+            <td><%= comment.comment %></td>
+            <td>
+              <% if comment.user == current_user %>
+              <%= link_to "削除", book_book_comment_path(comment.book,comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;" %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+
+          <!--コメント記入欄-->
+          <tr>
+            <td>
+          　<%= form_with model:[@book,@book_comment] do |f| %>
+            <%= f.text_area :comment, placeholder: "コメントをここに" %>
+            <%= f.submit "送信" %>
+            <% end %>
+            </td>
+          </tr>
+
+        　<!--本の投稿者とログイン中のユーザーが同じなら編集ボタン表示-->
+          <% if @book.user == current_user %>
           <td>
             <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
           </td>
-           <% end %>
-           <% if @book.user == current_user %>
+          <% end %>
+          <!--本の投稿者とログイン中のユーザーが同じなら削除ボタン表示-->
+          <% if @book.user == current_user %>
           <td>
             <%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
           </td>
-           <% end %>
+          <% end %>
         </tr>
       </table>
     </div>

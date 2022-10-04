@@ -4,6 +4,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
     @book_new = Book.new
+    @book_comment = BookComment.new
   end
 
   def index
@@ -11,7 +12,9 @@ class BooksController < ApplicationController
     @books = Book.all
     @user = current_user
     # @bookに空のモデルオブジェクトBookを作成し代入する
-    @book = Book.new
+    @book_new = Book.new
+    # 部分テンプレートに渡す
+    # @book = Book.find(params[:book_id])
   end
 
   def create
@@ -23,7 +26,7 @@ class BooksController < ApplicationController
       @books = Book.all
       @user = current_user
       render 'index'
-      @book = Book.new
+      @book_new = Book.new
     end
   end
 
