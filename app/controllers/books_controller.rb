@@ -12,9 +12,7 @@ class BooksController < ApplicationController
     @books = Book.all
     @user = current_user
     # @bookに空のモデルオブジェクトBookを作成し代入する
-    @book_new = Book.new
-    # 部分テンプレートに渡す
-    # @book = Book.find(params[:book_id])
+    @book = Book.new
   end
 
   def create
