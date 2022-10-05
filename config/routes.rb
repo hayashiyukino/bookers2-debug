@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   root :to =>"homes#top"
   get "home/about"=>"homes#about"
+  get '/search', to: 'searchs#search'
   
   # ネストさせる
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
@@ -22,5 +23,6 @@ Rails.application.routes.draw do
 
   post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
   delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
