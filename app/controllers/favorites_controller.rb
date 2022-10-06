@@ -11,4 +11,13 @@ class FavoritesController < ApplicationController
     Favorite.find_by(user_id: current_user.id, book_id: params[:id]).destroy
     redirect_to request.referer
   end
+  
+  def index
+    # @booksにBookテーブルに保存されたデータを全取得する
+    @books = Book.all
+    @user = current_user
+    # @bookに空のモデルオブジェクトBookを作成し代入する
+    @book = Book.new
+  end
+  
 end
