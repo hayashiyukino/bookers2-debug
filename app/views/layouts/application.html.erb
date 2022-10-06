@@ -10,10 +10,10 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'searchs/form' %>
       <main>
         <!--フラッシュメッセージ表示-->
-        <p id="notice"><%= notice %></p>
+        <p id="notice"><%= notice %></p> 
+        <%= render 'searchs/form' %>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>

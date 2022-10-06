@@ -16,19 +16,31 @@ class SearchsController < ApplicationController
   def search_for(model, content, method)
     # 選択したモデルがuserだったら
     if model == 'user'
-      # 選択した検索方法がが完全一致だったら
+      # contentの部分が検索ワードと一致するかみる。％の部分は何のワードが入っていてもよい
+      
+      # 選択した検索方法が完全一致だったら
       if method == 'perfect'
         User.where(name: content)
-      # 選択した検索方法がが部分一致だったら
-      else
-        User.where('name LIKE ?', '%'+content+'%')
+      # 選択した検索方法が部分一致だったら
+      elsif method == 'partial'
+        User.where('name LIKE?', '%'+content+'%')
+      # 選択した検索方法が前方一致だったら
+      elsif method == 'forward'
+        User.where('name LIKE?', content+'%')
+      # 選択した検索方法がそれら以外(後方一致）だったら
+      else 
+        User.where('name LIKE?', '%'+content)
       end
-    # 選択したモデルがpostだったら
+    # 選択したモデルがbookだったら
     elsif model == 'book'
       if method == 'perfect'
         Book.where(title: content)
-      else
+      elsif method == 'partial'
         Book.where('title LIKE ?', '%'+content+'%')
+      elsif method == 'forward'
+        Book.where('title LIKE?', content+'%')
+      else
+        Book.where('title LIKE?', '%'+content)
       end
     end
   end
