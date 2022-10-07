@@ -26,6 +26,7 @@
         <!--bookのbodyの内容を表示させる-->
         <td><%= book.body %></td>
         <%= render 'favorites/favorite', book: book %>
+        <%= render 'book_comments/book_comments',book:  %>
         <!--<td>-->
           <!--「favorite_by?(book.id)」はユーザーがいいねを押しているかどうかを判断するメソッドです。-->
         <!--  % if current_user.favorited_by?(book.id) %>-->
