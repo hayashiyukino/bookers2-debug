@@ -1,5 +1,6 @@
 <td>
   <!--「favorite_by?(book.id)」はユーザーがいいねを押しているかどうかを判断するメソッドです。-->
+  <!--テーブルとのやりとりに関するメソッドはモデルに置きます。今回はuserモデルで定義-->
   <% if current_user.favorited_by?(book.id) %>
     <div>
       <%= link_to destroy_favorite_path(book), class: "favorite-link", method: :DELETE do %>

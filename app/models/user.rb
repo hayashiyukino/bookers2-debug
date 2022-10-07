@@ -30,6 +30,7 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
   
+  # views/_favoriteに記述した.favorited_by?(book.id)の定義
   # favoritesテーブルに「book_id」が存在するかどうかの検索をかけます。
   # exists?メソッドは値が存在すればtrue、存在しない場合はfalseを返すメソッド
   def favorited_by?(book_id)

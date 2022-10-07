@@ -8,6 +8,7 @@ class FavoritesController < ApplicationController
 
   # destroyアクション(いいねを解除する機能)を定義
   def destroy
+    # 「find_byメソッド」は、複数の検索条件を指定することができるメソッド
     Favorite.find_by(user_id: current_user.id, book_id: params[:id]).destroy
     redirect_to request.referer
   end

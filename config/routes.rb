@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   
   # ネストさせる
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
+    # favoriteのshowページを作成することもないですし、idの受け渡しが発生しないので、resorceで記述します。
+    # resource:favorites,only:[:create,:destroy]
     resources:book_comments,only:[:create,:destroy]
   end
   
@@ -23,6 +25,8 @@ Rails.application.routes.draw do
 
   post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
   delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+  
+  
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
