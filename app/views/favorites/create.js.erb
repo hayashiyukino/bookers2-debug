@@ -1,3 +1,9 @@
 
-$(".favorite").html("<%= escape_javascript(render partial: 'favorites/favorite', locals: {book: @book}) %>");
+<!--$(".favorite").html("%= escape_javascript(render partial: 'favorites/favorite', locals: {book: @book}) %>");-->
   <!--インスタンス変数は、favorites_controllerのcreateアクションで定義されたものが使用できます。-->
+  
+<!--  $('#%= @book.id.to_s %>').html('%= j render "books/favorited", { book: @book } %>');-->
+  
+  <!--$("#post_%= @post.id %>")はどこを変えるかという記述になっており、cssとあまり変わりません。-->
+  <!--.html("%= j(render 'favorites/favorite', post: @post) %>")でどう変えるかを指定しています。-->
+  $("#book_<%= @book.id %>").html("<%= j(render 'favorites/favorite', book: @book) %>")

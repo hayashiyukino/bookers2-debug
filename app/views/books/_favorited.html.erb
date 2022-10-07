@@ -1,0 +1,7 @@
+<%= link_to (book_favorites_path(book.id, book.favorited_by(current_user)), method: :DELETE, remote: true, class: "favorited") do %>
+  <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>
+<% end %>
+
+<%= link_to (book_favorites_path(book), method: :POST, remote: true, class: "favorited") do %>
+  <i class="fa fa-heart favorite-btn"></i>
+<% end %>

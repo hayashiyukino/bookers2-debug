@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   get '/search', to: 'searchs#search'
   
-  # ネストさせる
+  # ネストさせる事でどの投稿に紐づくかを明示できる
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
-    resources:book_comments,only:[:create,:destroy]
+    resources :book_comments,only:[:create,:destroy]
+    # resourceと単数にすると、そのコントローラのidがリクエストに含まれなくなる
+    # いいねidの受け渡しが不要なのでresourceにしている
+    resource :favorites, only: [:create, :destroy]
+
   end
   
   # ネストさせる
@@ -21,8 +25,8 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
 
-  post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
-  delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+  # post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
+  # delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,20 +1,42 @@
-<td>
+<!--<td>-->
   <!--「favorite_by?(book.id)」はユーザーがいいねを押しているかどうかを判断するメソッドです。-->
-  <% if current_user.favorited_by?(book.id) %>
-    <div>
+<!--  % if current_user.favorited_by?(book.id) %>-->
+<!--    <div>-->
       <!--remote: trueは非同期処理で必要.パラメーターがHTML形式ではなくJS形式で送られるようになります。-->
-      <%= link_to destroy_favorite_path(book), class: "favorite-link", method: :DELETE, remote: true do %>
-        <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>
-      <% end %>
+<!--      %= link_to destroy_favorite_path(book), class: "favorite-link", method: :DELETE, remote: true do %>-->
+<!--        <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>-->
+<!--      % end %>-->
       <!--いいね数の取得には「countメソッド」を使用します。「countメソッド」を使用することで簡単に実装することができます。-->
-      <%= book.favorites.count %>
-    </div>
-  <% else %>
-    <div>
-      <%= link_to create_favorite_path(book), class: "favorite-link", method: :POST, remote: true do %>
-        <i class="fa fa-heart favorite-btn"></i>
-      <% end %>
-      <%= book.favorites.count %>
+<!--      %= book.favorites.count %>-->
+<!--    </div>-->
+<!--  % else %>-->
+<!--    <div>-->
+<!--      %= link_to create_favorite_path(book), class: "favorite-link", method: :POST, remote: true do %>-->
+<!--        <i class="fa fa-heart favorite-btn"></i>-->
+<!--      % end %>-->
+<!--      %= book.favorites.count %>-->
+<!--  </div>-->
+<!--  % end %>-->
+<!--</td>-->
+
+<td>
+  <div class="content-like">
+    <ul class="content-like__icons">
+      <li id="<%= book.id.to_s %>">
+        <!--favorited_by に引数としてcurrent_userを渡すことで、現在ログインしているユーザーが投稿に"いいね"をしているかどうか判断-->
+        <% if book.favorited_by(current_user).present? %>
+          <!--リンクが押された時に.js.erb ファイルを呼び出す必要があるので、link_toにremote: true オプションを追加する-->
+          <%= link_to book_favorites_path(book), method: :DELETE, remote: true, class: "favorited" do %>
+           <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>
+          <% end %>
+          <%= book.favorites.count %>
+        <% else %>
+          <%= link_to book_favorites_path(book), method: :POST, remote: true, class: "favorited" do %>
+           <i class="fa fa-heart favorite-btn"></i>
+          <% end %>
+          <%= book.favorites.count %>
+        <% end %>
+      </li>
+    </ul>
   </div>
-  <% end %>
 </td>

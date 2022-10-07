@@ -32,9 +32,9 @@ class User < ApplicationRecord
   
   # favoritesテーブルに「book_id」が存在するかどうかの検索をかけます。
   # exists?メソッドは値が存在すればtrue、存在しない場合はfalseを返すメソッド
-  def favorited_by?(book_id)
-    favorites.where(book_id: book_id).exists?  
-  end
+  # def favorited_by?(book_id)
+  #   favorites.where(book_id: book_id).exists?  
+  # end
   
   
   def get_profile_image
