@@ -28,8 +28,8 @@
         <!--いいね機能の非同期処理と部分テンプレート-->
          <!--id="%= book.id.to_s %>" = cssの指定（命名自由）非同期処理で必要-->
         <td id="<%= book.id.to_s %>"><%= render 'favorites/favorite', book: book %></td>
-        <!--コメント機能の非同期処理と部分テンプレート-->
-        <%= render 'book_comments/book_comments',book: book %>
+        <!--コメント機能(カウント)の部分テンプレート-->
+        <td><%= render 'book_comments/book_comments',book: book %></td>
       </tr>
     <% end %>
   </tbody>
