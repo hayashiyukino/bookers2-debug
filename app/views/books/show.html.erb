@@ -26,14 +26,9 @@
           <!--<td id="%= book_comments.id.to_s %>">%= render 'book_comments/book_comments',book: @book %></td>-->
           <td><%= render 'book_comments/book_comments',book: @book %></td>
           
-          <!--コメント一覧-->
-        
-          <%= render 'book_comments/book_comments_index', book: @book %>
-        
-          <!--コメント記入欄-->
-          <tr>
-            <td><%= render 'book_comments/book_comments_form', book: @book %></td>
-          </tr>
+          <!--コメント一覧,コメント記入欄 部分テンプレート-->
+          <%= render 'book_comments/book_comments_index', book: @book, book_comment: @book_comment %>
+          
         </tr>
       </table>
     </div>
