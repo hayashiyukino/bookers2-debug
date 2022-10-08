@@ -16,42 +16,20 @@
         <!--投稿したユーザー詳細画面に へのリンクをつける-->
         <td>
           <!--リンク先-->
-         <%= link_to user_path(book.user.id) do %>
-          <!--ユーザーの画像-->
-          <%= image_tag book.user.get_profile_image, size:'50x50' %>
+           <%= link_to user_path(book.user.id) do %>
+            <!--ユーザーの画像-->
+            <%= image_tag book.user.get_profile_image, size:'50x50' %>
           <% end %>
         </td>
         <!--bookのタイトル表示と、bookの詳細ページへのリンク先設定-->
         <td><%= link_to book.title, book_path(book.id) %></td>
         <!--bookのbodyの内容を表示させる-->
         <td><%= book.body %></td>
-        <%= render 'favorites/favorite', book: book %>
+        <!--いいね機能の非同期処理と部分テンプレート-->
+         <!--id="%= book.id.to_s %>" = cssの指定（命名自由）非同期処理で必要-->
+        <td id="<%= book.id.to_s %>"><%= render 'favorites/favorite', book: book %></td>
+        <!--コメント機能の非同期処理と部分テンプレート-->
         <%= render 'book_comments/book_comments',book: book %>
-        <!--<td>-->
-          <!--「favorite_by?(book.id)」はユーザーがいいねを押しているかどうかを判断するメソッドです。-->
-        <!--  % if current_user.favorited_by?(book.id) %>-->
-        <!--    <div>-->
-        <!--      %= link_to destroy_favorite_path(book), class: "favorite-link", method: :DELETE do %>-->
-        <!--        <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>-->
-        <!--      % end %>-->
-              <!--いいね数の取得には「countメソッド」を使用します。「countメソッド」を使用することで簡単に実装することができます。-->
-        <!--      %= book.favorites.count %>-->
-        <!--    </div>-->
-        <!--  % else %>-->
-        <!--    <div>-->
-        <!--      %= link_to create_favorite_path(book), class: "favorite-link", method: :POST do %>-->
-        <!--        <i class="fa fa-heart favorite-btn"></i>-->
-        <!--      % end %>-->
-        <!--      %= book.favorites.count %>-->
-        <!--    </div>-->
-        <!--  % end %>-->
-        <!--</td>-->
-        <!--コメントの数-->
-        <!--<td>コメント数：%= book.book_comments.count %></td>-->
-        <!-- % if book.user == current_user %>-->
-        <!--<td>%= link_to"Edit",edit_book_path(book.id),class:'btn btn-success'%></td>-->
-        <!--<td>%= link_to"Destroy",book_path(book), method: :delete, data: { confirm: '本当に消しますか？' }, class:'btn btn-danger'%></td>-->
-        <!--% end %>-->
       </tr>
     <% end %>
   </tbody>

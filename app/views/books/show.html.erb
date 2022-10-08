@@ -19,22 +19,22 @@
           <td><%= @book.body %></td>
           <td>
             <!--「favorite_by?(book.id)」はユーザーがいいねを押しているかどうかを判断するメソッドです。-->
-            <% if current_user.favorited_by?(@book.id) %>
-              <div>
-                <%= link_to destroy_favorite_path(@book), class: "favorite-link", method: :DELETE do %>
-                  <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>
-                <% end %>
+            <!--<% if current_user.favorited_by?(@book.id) %>-->
+            <!--  <div>-->
+            <!--    <%= link_to destroy_favorite_path(@book), class: "favorite-link", method: :DELETE do %>-->
+            <!--      <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>-->
+            <!--    <% end %>-->
                 <!--いいね数の取得には「countメソッド」を使用します。「countメソッド」を使用することで簡単に実装することができます。-->
-                <%= @book.favorites.count %>
-              </div>
-            <% else %>
-              <div>
-                <%= link_to create_favorite_path(@book), class: "favorite-link", method: :POST do %>
-                  <i class="fa fa-heart favorite-btn"></i>
-                <% end %>
-                <%= @book.favorites.count %>
-            </div>
-            <% end %>
+            <!--    <%= @book.favorites.count %>-->
+            <!--  </div>-->
+            <!--<% else %>-->
+            <!--  <div>-->
+            <!--    <%= link_to create_favorite_path(@book), class: "favorite-link", method: :POST do %>-->
+            <!--      <i class="fa fa-heart favorite-btn"></i>-->
+            <!--    <% end %>-->
+            <!--    <%= @book.favorites.count %>-->
+            <!--</div>-->
+            <!--<% end %>-->
           </td>
           <!--コメントの数-->
           <td>コメント数：<%= @book.book_comments.count %></td>

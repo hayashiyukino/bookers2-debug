@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # ネストさせる
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     # favoriteのshowページを作成することもないですし、idの受け渡しが発生しないので、resorceで記述します。
-    # resource:favorites,only:[:create,:destroy]
+    resource:favorites,only:[:create,:destroy]
     resources:book_comments,only:[:create,:destroy]
   end
   
@@ -23,8 +23,8 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
 
-  post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
-  delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
+  # post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
+  # delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
   
   
   
