@@ -16,7 +16,7 @@
         <!--投稿したユーザー詳細画面に へのリンクをつける-->
         <td>
           <!--リンク先-->
-           <%= link_to user_path(book.user.id) do %>
+          <%= link_to user_path(book.user.id) do %>
             <!--ユーザーの画像-->
             <%= image_tag book.user.get_profile_image, size:'50x50' %>
           <% end %>

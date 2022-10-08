@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'relationships/followings'
   get 'relationships/followers'
-  # get 'book_comments create/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 
@@ -9,11 +8,11 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   get '/search', to: 'searchs#search'
   
-  # ネストさせる
+  # いいね、コメントは投稿に紐付いているのでルーティングはネストさせる
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     # favoriteのshowページを作成することもないですし、idの受け渡しが発生しないので、resorceで記述します。
-    resource:favorites,only:[:create,:destroy]
-    resources:book_comments,only:[:create,:destroy]
+    resource :favorites, only:[:create,:destroy]
+    resources :book_comments, only:[:create,:destroy]
   end
   
   # ネストさせる
@@ -23,10 +22,5 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
 
-  # post 'favorite/:id' => 'favorites#create', as: 'create_favorite'
-  # delete 'favorite/:id' => 'favorites#destroy', as: 'destroy_favorite'
-  
-  
-  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

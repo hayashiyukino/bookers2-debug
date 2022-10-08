@@ -9,15 +9,13 @@ class BookCommentsController < ApplicationController
   # 空のインスタンスのbook_idは、今取り出してる"ある投稿”のidだよという意味だと思います。”ある投稿”に対してコメントしますよ〜という感じ
    @comment.book_id = @book.id
    @comment.save
-   redirect_to request.referer
   end
   
   def destroy
     @book = Book.find(params[:book_id])
     @comment = BookComment.find(params[:id])
     @comment.destroy
-    redirect_to request.referer
-    
+
   end
   
   private

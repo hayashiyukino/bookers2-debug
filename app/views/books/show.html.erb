@@ -8,7 +8,7 @@
     </div>
     <div class='col-md-8 offset-md-1'>
   		<h2>Book detail</h2>
-  		<table class='table'>
+  		<table class='table table-hover table-inverse'>
   		  <tr>
           <td><%= link_to user_path(@book.user.id) do %>
             <%= image_tag @book.user.get_profile_image, size:"100x100" %><br>
@@ -17,57 +17,22 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
-          <td>
-            <!--「favorite_by?(book.id)」はユーザーがいいねを押しているかどうかを判断するメソッドです。-->
-            <!--<% if current_user.favorited_by?(@book.id) %>-->
-            <!--  <div>-->
-            <!--    <%= link_to destroy_favorite_path(@book), class: "favorite-link", method: :DELETE do %>-->
-            <!--      <i class="fa fa-heart unfavorite-btn", style="color:red;"></i>-->
-            <!--    <% end %>-->
-                <!--いいね数の取得には「countメソッド」を使用します。「countメソッド」を使用することで簡単に実装することができます。-->
-            <!--    <%= @book.favorites.count %>-->
-            <!--  </div>-->
-            <!--<% else %>-->
-            <!--  <div>-->
-            <!--    <%= link_to create_favorite_path(@book), class: "favorite-link", method: :POST do %>-->
-            <!--      <i class="fa fa-heart favorite-btn"></i>-->
-            <!--    <% end %>-->
-            <!--    <%= @book.favorites.count %>-->
-            <!--</div>-->
-            <!--<% end %>-->
-          </td>
-          <!--コメントの数-->
-          <td>コメント数：<%= @book.book_comments.count %></td>
-          <% if @book.user == current_user %>
-          <td><%= link_to "Edit",edit_book_path(@book), class: 'btn btn-success'%></td>
-          <td><%= link_to "Destroy",book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'btn btn-danger'%></td>
-          <% end %>
+          
+          <!--いいね機能の非同期処理と部分テンプレート-->
+          <!--id="%= book.id.to_s %>" = cssの指定（命名自由）非同期処理で必要-->
+          <td id="<%= @book.id.to_s %>"><%= render 'favorites/favorite', book: @book %></td>
+          
+          <!--コメント機能の非同期処理と部分テンプレート-->
+          <!--<td id="%= book_comments.id.to_s %>">%= render 'book_comments/book_comments',book: @book %></td>-->
+          <td><%= render 'book_comments/book_comments',book: @book %></td>
+          
           <!--コメント一覧-->
-          <% @book.book_comments.each do |comment| %>
-          <tr>
-            <td>
-              <%= link_to user_path(comment.user.id) do %>
-                <%= image_tag comment.user.get_profile_image,size: "30x30" %>
-                <br><%= comment.user.name %>
-              <% end %>
-            </td>
-            <td><%= comment.comment %></td>
-            <td>
-          <!--本の投稿者とログイン中のユーザーが同じなら削除ボタン表示-->
-              <% if comment.user == current_user %>
-              <%= link_to "削除", book_book_comment_path(comment.book,comment), method: :delete, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;" %>
-              <% end %>
-            </td>
-          </tr>
-          <% end %>
+        
+          <%= render 'book_comments/book_comments_index', book: @book %>
+        
           <!--コメント記入欄-->
           <tr>
-            <td>
-            <%= form_with model:[@book,@book_comment] do |f| %>
-            <%= f.text_area :comment,rows:'5', placeholder: "コメントをここに", class: "w-100" %>
-            <%= f.submit "送信", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-            <% end %>
-            </td>
+            <td><%= render 'book_comments/book_comments_form', book: @book %></td>
           </tr>
         </tr>
       </table>
