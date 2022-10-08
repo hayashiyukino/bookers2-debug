@@ -12,6 +12,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
+    # ko
     # find_by = 与えられた条件にマッチするレコードのうち最初のレコードだけを返す。
     # (params[:book_id])で、本の投稿から”ある投稿”を取り出せます。
     @book = Book.find_by(id: params[:book_id])
