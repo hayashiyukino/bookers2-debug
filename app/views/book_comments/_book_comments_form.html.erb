@@ -1,8 +1,8 @@
 <!--コメント記入欄-->
 
-  <!--localオプションは、「同期処理にするかどうか」という設定を行うオプション-->
-  <!--「非同期」の処理となるので、local: false(オフ)という設定-->
-  <%= form_with model:[book,book_comment], local: false do |f| %>
-    <%= f.text_area :comment, rows:'5' %>
-    <%= f.submit "送信" %>
-  <% end %>
+<!--localオプションは、「同期処理にするかどうか」という設定を行うオプション-->
+<!--「非同期」の処理となるので、local: false(オフ)という設定-->
+<%= form_with model:[book,book_comment], local: false do |f| %>
+  <%= f.text_area :comment, rows:'5' %>
+  <%= f.submit "送信" %>
+<% end %>
