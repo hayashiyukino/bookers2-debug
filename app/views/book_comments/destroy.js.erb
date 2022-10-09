@@ -1,2 +1,4 @@
 <!--対象の子要素(前半部分)のhtmlを、カッコ内のもの(後半部分)に変更する。-->
-$('#<%= @book_comments.id.to_s %>').html("<%= j(render 'book_comments/book_comments_index', book: @book, book_comment: @book_comment) %>");
+<!--create.js.erbで@books @book_commentをわたしているので、book_commentsコントローラーでこの値を定義しないといけない-->
+$('#book_comments').html("<%= j(render 'book_comments/book_comments_index', book: @book) %>");
+$('#book_comments_form').html("<%= j(render 'book_comments/book_comments_form', book: @book, book_comment: @book_comment) %>");

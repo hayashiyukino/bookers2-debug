@@ -1,30 +1,15 @@
  <!--コメント一覧-->
 <% book.book_comments.each do |comment| %>
-<tr>
-  <td>
+
     <%= link_to user_path(comment.user.id) do %>
       <%= image_tag comment.user.get_profile_image,size: "30x30" %>
       <br><%= comment.user.name %>
     <% end %>
-  </td>
-  <td><%= comment.comment %></td>
-  <td>
+    <%= comment.comment %>
     <!--本の投稿者とログイン中のユーザーが同じなら削除ボタン表示-->
     <% if comment.user == current_user %>
     <%= link_to "Destroy", book_book_comment_path(comment.book,comment), method: :DELETE, remote: true, class: "btn btn-sm btn-danger p-0 p-1", style: "font-size: 8px;" %>
     <% end %>
-  </td>
-</tr>
+
 <% end %>
 
-<!--コメント記入欄-->
-<tr>
-  <td>
-    <!--localオプションは、「同期処理にするかどうか」という設定を行うオプション-->
-    <!--「非同期」の処理となるので、local: false(オフ)という設定-->
-    <%= form_with model:[book,book_comment], local: false do |f| %>
-      <%= f.text_area :comment, rows:'5' %>
-      <%= f.submit "送信" %>
-    <% end %>
-  </td>
-</tr>

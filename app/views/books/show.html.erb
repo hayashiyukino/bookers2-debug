@@ -20,15 +20,20 @@
           
           <!--いいね機能の非同期処理と部分テンプレート-->
           <!--id="%= book.id.to_s %>" = cssの指定（命名自由）非同期処理で必要-->
+          <!--スタイルを変えたいタグにid属性と属性値を記述します。属性値には、セレクタ名（ここでは"%= @book.id.to_s %>">）を指定-->
           <td id="<%= @book.id.to_s %>"><%= render 'favorites/favorite', book: @book %></td>
           
           <!--コメント機能(カウント)の部分テンプレート-->
           <td><%= render 'book_comments/book_comments',book: @book %></td>
           
-          <!--コメント一覧,コメント記入欄 非同期処理と部分テンプレート-->
-          <!--<td id="%= @book_comments.id.to_s %>"><%= render 'book_comments/book_comments_index', book: @book, book_comment: @book_comment %></td>-->
+          
         </tr>
       </table>
+      <!--コメント一覧 非同期処理と部分テンプレート-->
+      <!--いいね機能はbook の１つ１つにいいねをつける事が出来るので。変数を用いて記述しているが、コメント投稿はその必要がないので%= 等無く、id名だけ与える。-->
+      <div id="book_comments_form"><%= render 'book_comments/book_comments_form', book: @book,  book_comment: @book_comment %></div>
+      <!--コメント記入欄 非同期処理とテンプレート-->
+      <div id="book_comments"><%= render 'book_comments/book_comments_index', book: @book %></div>
     </div>
   </div>
 </div>
